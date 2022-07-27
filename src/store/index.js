@@ -75,7 +75,7 @@ export default new Vuex.Store({
   },
   actions: {
     getList(context) {
-      Axios.get('/list.json').then(({ data }) => {
+      Axios.get('./list.json').then(({ data }) => {
         context.commit('initList', data)
       })
 
