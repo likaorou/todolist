@@ -65,6 +65,9 @@ export default {
   created() {
     this.$store.dispatch("getList");
   },
+  beforeUpdate() {
+    this.$store.dispatch("saveList");
+  },
   computed: {
     ...mapState(["list", "inputValue", "viewKey"]),
     ...mapGetters(["unDoneLength", "infoList"]),
@@ -97,7 +100,6 @@ export default {
         id: row.id,
         status: !row.done,
       };
-
       this.$store.commit("changeStatus", param);
     },
     statusChangedAll(val) {

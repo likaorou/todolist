@@ -75,10 +75,16 @@ export default new Vuex.Store({
   },
   actions: {
     getList(context) {
-      Axios.get('./list.json').then(({ data }) => {
-        context.commit('initList', data)
-      })
-
+      if (sessionStorage.length == 0) {
+        Axios.get('./list.json').then(({ data }) => {
+          context.commit('initList', data)
+        })
+      } else {
+        context.commit('initList', JSON.parse(sessionStorage.getItem('data')))
+      }
+    },
+    saveList() {
+      sessionStorage.setItem("data", JSON.stringify(this.state.list))
     }
   },
   modules: {
